@@ -11,7 +11,7 @@ server.get('/', (req, res) => {
 })
 
 server.get('/users', (req, res) => {
-  Users.getAll()
+  Users.getAllUsers()
     .then(users => {
       res.status(200).json(users);
     })
