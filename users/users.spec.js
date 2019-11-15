@@ -36,10 +36,6 @@ describe("Users model", () => {
   });
   describe('remove()', () => {
 
-    // beforeEach(async () => {
-    //   await db('users').truncate()
-    // })
-
     it('should delete user', async () => {
 
      await remove(1)//SQL starts at 1 NOT 0
