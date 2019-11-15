@@ -1,17 +1,17 @@
 
-// const router = require('express').Router();
+const router = require('express').Router();
 
-// const Users = require('./usersModel')
+const Users = require('./usersModel')
 
-// router.get('/users', (req, res) => {
-//   Users.getAll()
-//     .then(users => {
-//       res.status(200).json(users);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-// })
+router.get('/users', (req, res) => {
+  Users.getAllUsers()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+})
 
-// module.exports = router;
+module.exports = router;
 

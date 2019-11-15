@@ -1,22 +1,56 @@
-const db = require('../data/dbConfig');
+const request = require("supertest");
 
-const {insert} = require('./usersModel');
+const server = require("../api/server");
 
-describe('Users model', () => {
+const db = require("../data/dbConfig");
 
-  describe('insert()', () => {
-    
+const { insert, remove } = require("./usersModel");
+// const {remove} = requi
+
+describe("Users model", () => {
+  describe("insert()", () => {
     beforeEach(async () => {
-      await db('users').truncate()
-    })
+      await db("users").truncate();
+    });
 
-    it('should insert user', async () => {
-      await insert({name: 'Prancer'})
+    it("should insert user", async () => {
+      await insert({ name: "Prancer" });
+
+      const users = await db("users");
+
+      expect(users).toHaveLength(1);
+    });
+
+    it("should insert provided user", async () => {
+      await insert({ name: "Prancer" }),
+        await insert({ name: "pTd" }),
+        await insert({ name: "Olivia Susan" });
+
+      const users = await db("users");
+
+      expect(users).toHaveLength(3);
+      expect(users[0].name).toBe("Prancer");
+      expect(users[1].name).toBe("pTd");
+      expect(users[2].name).toBe("Olivia Susan");
+    });
+  });
+  describe('remove()', () => {
+
+    // beforeEach(async () => {
+    //   await db('users').truncate()
+    // })
+
+    it('should delete user', async () => {
+
+     await remove(1)//SQL starts at 1 NOT 0
 
       const users = await db('users')
 
-      expect(users).toHaveLength(1)
+      expect(users).toHaveLength(2)
+
+ 
+      expect(users[0].name).toBe('pTd')
+      expect(users[1].name).toBe('Olivia Susan')
     })
   })
-
-})  
+});
