@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 const Users = require('./usersModel')
 
-router.get('/users', (req, res) => {
+router.get('/', (req, res) => {
   Users.getAllUsers()
     .then(users => {
       res.status(200).json(users);
